@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
+</head>
+{% block content %}
+<div class="container-fluid">
+    {% if user.is_authenticated %}
+    <h1>Create Review</h1>
+    <form action="{% url 'djangoapp:addreview' dealer_id %}" method="post">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="col-6 text-left">
+        <div class="form-group">
+            <label for="userNameInput">Name</label>
+            <input type="text" class="form-control" id="userNameInput" placeholder="Enter Your Name..." name="createreviewform_name" value="{{user.last_name}} {{user.first_name}}" required>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="reviewInput">Review</label>
+            <textarea class="form-control" id="reviewInput" placeholder="Enter Review..." name="createreviewform_review" required></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="purchaseInput">Purchased</label>
+            <input type="checkbox" id="purchaseInput" class="form-control d-flex justify-content-start" name="createreviewform_purchase">
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="purchaseDateInput">Purchase Date</label>
+            <input type="date" id="purchaseDateInput" class="form-control" name="createreviewform_purchase_date">
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="carMakeInput">Make</label>
+            <input type="text" id="carMakeInput" class="form-control" name="createreviewform_car_make">
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="carModelInput">Model</label>
+            <input type="text" id="carModelInput" class="form-control" name="createreviewform_car_model">
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="carYearInput">Year</label>
+            <input type="date" class="form-control" id="carYearInput" name="createreviewform_car_year">
+        </div>                
+        {% if error_message %}
+        <div class="alert alert-warning my-3">
+            {{ error_message }}
+        </div>
+        {% elif success_message %}
+        <div class="alert alert-success my-3">
+            {{ success_message }}
+        </div>
+        {% endif %}
+        <br/>
+        <button class="btn btn-primary" type="submit">Submit Review</button>
+    </div>
+    </div>
+    </form>
+    {% else %}
+    <p>Please login to add review.</p>
+    {% endif %}
+</div>
+{% endblock %}
+</html>
