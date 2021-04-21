@@ -1,3 +1,7 @@
+name: Build and deploy to IBM Cloud Foundry
+
+on: workflow_dispatch
+
 # Environment variables available to all jobs and steps in this workflow
 env:
   IBM_CLOUD_REGION: eu-gb
