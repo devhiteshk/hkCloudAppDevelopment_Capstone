@@ -1,11 +1,11 @@
 applications:
-  - name: djangoapp
+  - name: djangoappfinalcap
     routes:
-      - route: gscapm84.us-south.cf.appdomain.cloud
+      - route: djangoappfinalcap.eu-gb.mybluemix.net
     memory: 128M
     buildpack: python_buildpack
   - name: djangoapp-nginx
     routes:
-      - route: gscapm84.us-south.cf.appdomain.cloud/static
+      - route: djangoappfinalcap.eu-gb.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
